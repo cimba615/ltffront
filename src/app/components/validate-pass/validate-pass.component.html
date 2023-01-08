@@ -1,0 +1,29 @@
+<div class="container-fluid page-hadding">
+    <div class="hadding">
+      <h2>PASSWORD RESET</h2>
+    </div>
+  </div>
+  <!--====== Hadding End ======-->
+  <div class="checkout-sectiom">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-6">
+          <div>
+            We've sent a reset token to the email you provided. Please copy and paste that token here to continue.
+          </div>
+          <br>
+          <div class="login-from">
+            <form [formGroup]="resetForm" (submit)='savePass()'>
+                <label for="token" id="email">Reset Token</label>
+                <input type="text" name="token" placeholder="Token" id="token" required="" formControlName="token">
+                <label for="password" id="password">Password</label>
+                <input type="password" name="password" placeholder="Password" id="password" required="" formControlName="password">
+                <label for="cPassword" id="cPassword">Confirm Password</label>
+                <input type="password" name="cPassword" placeholder="Confirm Password" id="cPassword" required="" formControlName="cPassword">
+                <input type="submit" value="SAVE">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

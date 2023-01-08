@@ -1,0 +1,61 @@
+@import ~bootstrap/dist/css/bootstrap.min.css
+@import ~@angular/material/theming
+@import ~ngx-sharebuttons/themes/default/default-theme
++mat-core
+
+$theGreen: #86AA95
+
+body
+    user-select: none
+    font-size: 14px
+    background-color: #f7f5f5 !important
+
+*:focus
+    outline-width: 0
+
+ul 
+    margin: 0
+    padding: 0
+
+ul li 
+    list-style: none
+
+h1, h2, h3, h4, h5, h6, p 
+    margin: 0
+
+.row
+    margin-right: 0px !important
+    margin-left: 0px !important
+
+.panelClass
+    .mat-dialog-container
+        background: white
+        border-radius: 8px
+        box-shadow: none
+
+.container-fluid 
+    padding-right: 0px
+    padding-left: 0px 
+    margin-right: auto
+    margin-left: auto
+
+
+.cdk-overlay-dark-backdrop
+    background: rgba(0, 0, 0, 0.75)
+
+.loadingPanel
+    .mat-progress-spinner circle, .mat-spinner circle
+        stroke: #96BAA5
+
+    .mat-dialog-container
+        background: transparent
+        box-shadow: none
+        overflow: hidden
+
+.errorPanel
+    .mat-dialog-container
+        background: white !important
+        border-radius: 0
+        box-shadow: none
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap'

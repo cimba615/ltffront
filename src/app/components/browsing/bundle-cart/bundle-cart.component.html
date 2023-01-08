@@ -1,0 +1,98 @@
+<div class="container-fluid page-hadding">
+    <div class="hadding">
+      <h2>ADD ITEM TO CART</h2>
+    </div>
+  </div>
+  <div class="container">
+    <div class="product-section">
+      <div class="row row-eq-height">
+        <div class="col-lg-4 col-lg-4 col-md-5 offset-md-1 offset-lg-0">
+          <ngb-carousel>
+            <ng-template ngbSlide>
+              <img src="{{imgUrl}}{{bundle.Image}}" alt="{{bundle.Name}}" style="width: 100%;">
+            </ng-template>
+            <ng-template ngbSlide>
+              <img src="{{imgUrl}}{{bundle.Image}}" alt="{{bundle.Name}}" style="width: 100%;">
+            </ng-template>
+            <ng-template ngbSlide>
+              <img src="{{imgUrl}}{{bundle.Image}}" alt="{{bundle.Name}}" style="width: 100%;">
+            </ng-template>
+          </ngb-carousel>
+          <share-button button="facebook" theme="circles-dark"></share-button>
+          <share-button button="twitter" theme="circles-dark"></share-button>
+          <share-button button="pinterest" theme="circles-dark"></share-button>
+          <share-button button="whatsapp" theme="circles-dark"></share-button>
+        </div>
+        <div class="col-lg-8 col-lg-8 col-md-6">
+          <div class="categories-page">
+            <div class="page-title">
+              <h3>{{bundle.Name}}</h3>
+            </div>
+            <div class="price-tag">
+              <h4>${{bundle.Price}}</h4>
+            </div>
+            <div class="number-spiner">
+              <div class="nice-number">
+                <label for="number">Quantity</label>
+                <div class="nice-number">
+                  <button type="button" (click)="decrease()"><i class="fas fa-caret-left"></i></button>
+                  <input #prodQty type="number" value="{{quantity}}">
+                  <button type="button" (click)="increase()"><i class="fas fa-caret-right"></i></button>
+                </div>
+                <button type="button" class="addButton" (click)="addItemToCart(modalContent)">ADD TO CART</button>
+              </div>
+            </div>
+  
+            <!-- <div class="row">
+              <div class="col-12 special-item">
+                <h4>ADD SPECIAL ITEMS</h4>
+                <div class="specialItems">
+                  <div *ngFor="let si of specialItems" class="spacel-image-tem" (click)="toggleSpecialItem($event, si)">
+                    <img src="{{imgUrl}}{{si.Image}}" class="img-responsive">
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 special-item">
+                <h4>ADD BALLOONS</h4>
+                <div class="balloons">
+                  <div *ngFor="let si of specialBalloons" class="spacel-image-tem" (click)="toggleSpecialItem($event, si)">
+                    <img src="{{imgUrl}}{{si.Image}}" class="img-responsive">
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #modalContent let-modal>
+    <div class="modal-header">
+      <h5>Adding the following items to cart.</h5>
+    </div>
+  
+    <div class="modal-body additemmodal">
+      <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 imageand-contant">
+          <div class="modal-image">
+            <img src="{{imgUrl}}{{bundle.Image}}" alt="{{bundle.Name}}" class="img-responsive">
+          </div>
+          <h4>{{bundle.Name}}</h4>
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 date-section">
+          <h5>Products:</h5>
+          <div class="addons">
+            <img *ngFor="let si of bundle.Products" src="{{imgUrl}}{{si.Image}}" alt="{{si.Name}}" style="float: left; margin: 0 10px; width: 120px; height: 150px;"/>
+            <span *ngIf="bundle.Products.length === 0">None</span>
+          </div>
+          <br />
+          <p>Subtotal: <span class="sub-total">{{calcSubtotal()}}$</span></p>
+          <div class="modal-btn">
+            <button (click)="checkout()">Checkout</button>
+            <button (click)="addCartProduct()">Continue Shopping</button>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </ng-template>

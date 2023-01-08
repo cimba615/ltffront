@@ -1,0 +1,38 @@
+<div class="container-fluid page-hadding">
+  <div class="hadding">
+    <h2>PROFILE</h2>
+  </div>
+</div>
+<!--====== Hadding End ======-->
+<div class="checkout-sectiom">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-6">
+        <div class="logoutButton">
+          <input type="button" value="Forget Me On This Device" (click)="logout()">
+        </div>
+        <div class="login-from">
+          <form [formGroup]="profileForm">
+            <label for="fName" id="fName">First Name</label>
+            <input type="text" name="fName" placeholder="First Name" id="fName" formControlName="fName">
+            <label for="lName" id="lName">Last Name</label>
+            <input type="text" name="lName" placeholder="Last Name" id="lName" formControlName="lName">
+            <label for="phone" id="phone">Phone</label>
+            <input type="text" name="phone" placeholder="Phone" id="phone" formControlName="phone">
+            <label for="address" id="address">Address</label>
+            <input type="text" name="address" placeholder="Address" id="address" formControlName="address">
+            <input type="checkbox" name="newsletter" id="newsletter" formControlName="newsletter">
+            <label for="address" id="address">Subscribe To Newsletter</label>
+            <hr>
+            <div class="warningRed">* Change your password here, or leave it blank to keep it</div>
+            <label for="password" id="password">Password</label>
+            <input type="password" name="password" placeholder="Password" id="password" formControlName="password">
+            <label for="cPassword" id="cPassword">Confirm Password</label>
+            <input type="Password" name="cPassword" placeholder="Confirm Password" id="cPassword" formControlName="cPassword">
+            <input type="button" value="Save" (click)="update()">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

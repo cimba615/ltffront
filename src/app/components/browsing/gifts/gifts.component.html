@@ -1,0 +1,58 @@
+<!--       slider srart-->
+<div class="container-fluid">
+  <div class="carousel-inner gifts-slider">
+    <ngb-carousel>
+      <ng-template *ngFor="let i of [1, 2]" ngbSlide>
+        <div class="item gifts-slider-item active">
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-sm-6 col-xs-12 slider-write">
+              <h3>CHOOSE A GIFT TO CELEBRATE WITH YOUR LOVED ONE</h3>
+              <p>We have something for every occasion</p>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-sm-6 d-none d-sm-block">
+              <img src="http://images.lestroisfleurs.com/images/cdn/giftsSweets/{{3*i - 2}}.png" class="img-responsive" alt="...">
+            </div>
+            <div class="col-xl-3 col-lg-4 d-none d-lg-block">
+              <img src="http://images.lestroisfleurs.com/images/cdn/giftsSweets/{{3*i - 1}}.png" class="img-responsive" alt="...">
+            </div>
+            <div class="col-xl-3 d-none d-xl-block">
+              <img src="http://images.lestroisfleurs.com/images/cdn/giftsSweets/{{3*i}}.png" class="img-responsive" alt="...">
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+</div>
+<!--       slider End-->
+<div class="container-fluid page-hadding">
+  <div class="hadding">
+    <h2>GIFTS &amp; SWEETS</h2>
+  </div>
+</div>
+<!--====== Heading End ======-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2 col-sm-9 col-xs-12">
+      <div class="sidbar-left">
+        <h2>CATEGORIES</h2>
+        <ltf-categories [typeID]="[3, 4]" (productsFilter)="filterByCateg($event)"></ltf-categories>
+        <br>
+        <div class="price-filter">
+          <h2>PRICE</h2>
+          <ltf-range-slider (priceFilter)="filterByPrice($event)"></ltf-range-slider>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+      <div class="product-section">
+        <div class="row row-eq-height">
+          <div *ngFor="let product of products" class="col-xl-4 col-md-6 col-xs-12">
+            <ltf-product [product]="product" (categFilter)="filterByCateg($event)"></ltf-product>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-center" *ngIf="cntToLoad < maxToLoad"><span class="btn see-more-btn" (click)="loadMore()">SEE MORE</span></div>
+  </div>
+</div>

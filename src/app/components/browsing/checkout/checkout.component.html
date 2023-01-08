@@ -1,0 +1,39 @@
+<div class="container-fluid page-hadding">
+  <div class="hadding">
+    <h2>CHECK OUT</h2>
+  </div>
+</div>
+<!--====== Hadding End ======-->
+<div class="checkout-sectiom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="guest-form">
+          <h4>GUEST CHECKOUT</h4>
+
+          <form [formGroup]="checkoutForm" (submit)="onSubmit()">
+            <label for="email">Guest Details</label>
+            <input type="text" name="name" placeholder="Name" formControlName="name">
+            <input type="email" name="email" placeholder="Email" formControlName="email">
+            <input type="text" name="phone" placeholder="Phone" formControlName="phone">
+            <input type="submit" value="Continue">
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="login-from">
+          <h4>LOGIN</h4>
+          <div class="href" [routerLink]="['/register']">Create an account</div>
+          <form [formGroup]="loginForm" (submit)="onLogin()">
+            <label for="email" id="email">Email</label>
+            <input type="email" name="email" placeholder="Email" id="email" formControlName="email">
+            <label for="password" id="password">Password</label>
+            <input type="password" name="password" placeholder="Password" id="password" formControlName="password">
+            <a [routerLink]="['/passReset']">Forgot Password?</a><br>
+            <input type="submit" value="Log in">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,274 @@
+.page-hadding
+    background-image: url('/assets/images/hadder-background.png')
+    background-repeat: repeat
+    height: 50px
+    text-align: center
+    margin-top: 10px
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-flow: column
+
+.product-section
+    padding: 30px 0px
+
+.categories-page p 
+    color: #A6A6A6
+    font-size: 13px
+
+.page-title h3 
+    color: #86AA95
+    font-size: 20px
+    font-weight: 600
+
+.sp-day-banner img
+    margin: auto
+
+.special-item
+    margin-top: 20px
+
+.special-item h4
+    margin-bottom: 10px
+    color: #000
+
+.spacel-image-tem img
+    margin: 0 3px
+    width: 120px
+    height: 150px
+    background: #F4F2F2
+
+.spacel-image-tem
+    position: relative
+    float: left
+    margin-top: 10px
+
+.checkproduct h4
+    color: #86AA95
+    font-weight: bold
+
+.checkproduct p
+    font-size: 12px
+    color: #A6A6A6
+
+.nice-number
+    display: inline-flex
+    justify-content: stretch
+    button
+        cursor: pointer
+        z-index: 2
+    input
+        vertical-align: middle
+        // -moz-appearance: textfield
+        box-sizing: content-box
+        margin: 0
+        text-align: center
+        z-index: 1
+        // &:-webkit-outer-spin-button, &:-webkit-inner-spin-button
+        //     -webkit-appearance: none
+        //     margin: 0
+    
+.number-spiner
+    margin-top: 15px
+    width: 100%
+    background: #EDEDED
+    padding: 10px 5px
+    position: relative
+
+.number-spiner label
+    display: inline-block
+    max-width: 100%
+    margin: 4px 0px 5px 10px
+    font-weight: normal
+    
+.number-spiner input[type="number"]
+    background-color: transparent
+    border: none
+    right: 80px
+    top: -2px
+    position: absolute
+    height: 100%
+    color: #000
+    font-weight: bold
+    
+.number-spiner [type="button"]:first-child
+    background-color: transparent
+    border: none
+    right: 190px
+    position: absolute
+    height: 100%
+    color: #A0A1A0
+    font-weight: bold
+    font-size: 18px
+    padding: 0 10px
+    
+.number-spiner [type="button"]:last-child
+    background-color: transparent
+    border: none
+    right: 150px
+    position: absolute
+    height: 100%
+    color: #A0A1A0
+    font-weight: bold
+    font-size: 18px
+    padding: 0 10px
+    
+.number-spiner button[type="button"]
+    background: #86AA95
+    border: none
+    right: 0px
+    top: 0px
+    position: absolute
+    height: 100%
+    color: #fff
+    font-weight: bold
+    padding: 0px 40px
+    
+.number-spiner button[type="button"].addButton
+    background: #86AA95
+    border: none
+    right: 0px
+    top: 0px
+    position: absolute
+    height: 100%
+    color: #fff
+    font-weight: bold
+    font-size: 14px
+    padding: 0px 25px
+    cursor: pointer
+    
+.quantity-spiner
+    margin-top: 13px
+    
+.quantity-spiner button
+    background-color: transparent
+    border: none
+    color: #A0A1A0
+    
+.quantity-spiner input
+    border: none
+    
+.totalparice
+    margin-top: 60px
+    
+.number-spiner h5
+    background: #86AA95
+    border: none
+    right: 0px
+    top: 0px
+    position: absolute
+    height: 100%
+    color: #fff
+    font-weight: bold
+    padding: 0px 80px
+    display: flex
+    justify-content: center
+    align-content: center
+    flex-flow: column
+
+/*chart popup css*/
+.modal-image
+    background: #F4F2F2
+    padding: 20px
+    text-align: center
+    img
+        max-width: 100%
+    
+.imageand-contant h4
+    color: #86AA95
+    font-size: 18px
+    margin-top: 5px
+    
+.imageand-contant p
+    font-size: 10px
+    color: #A6A6A6
+    
+.date-section
+    padding: 0 40px
+    p
+        line-height: 22px
+    .sub-total
+        color: #86AA95
+    .addons
+        margin: 20px 0
+        display: inline-block
+        min-height: 200px
+    
+.modal-btn
+    margin-top: 30px
+    
+.modal-btn button
+    padding: 5px 20px
+    background: #86AA95
+    color: #fff
+    text-decoration: none
+    font-weight: bold
+    border: none
+    margin: 5px
+    
+.lesmodal
+    padding-bottom: 10px
+    
+.modal-btn button:hover, .modal-btn button:focus
+    background: #DCE2E0
+    
+.modal-header
+    padding: 15px
+    border-bottom: none
+    
+.lesmodal .modal-header
+    position: relative
+    
+.lesmodal .modal-header h5::after
+    position: absolute
+    width: 70%
+    height: 1px
+    content: ""
+    background: #000
+    top: 25px
+    left: 145px
+    
+.lesmodal .modal-header .close
+    margin-top: -1px
+    
+.productChecked
+    &:after
+        font-family: 'Font Awesome 5 Free'
+        content: "\f058"
+        position: absolute
+        top: -10px
+        left: 115px
+        color: green
+        background: white
+        border-radius: 7px
+        width: 14px
+        height: 16px
+
+::ng-deep
+    .carousel-caption
+        padding-bottom: 50px
+        color: black
+        text-align: initial
+        float: left
+
+    .carousel-indicators 
+        bottom: -30px
+        .active
+            background-color: #000
+        li
+            margin-left: 5px !important
+            width: 8px
+            height: 8px
+            background-color: #86AA95
+            border: 0px solid #fff 
+            border-radius: 10px
+            .active
+                border-color: #000
+
+    .carousel-item
+        text-align: center
+        img
+            height: 400px
+            float: right
+
+    .carousel-control-prev, .carousel-control-next
+        display: none

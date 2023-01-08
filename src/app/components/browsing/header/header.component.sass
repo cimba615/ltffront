@@ -1,0 +1,110 @@
+header
+    font-family: "Gotham"
+    color: #262526
+    font-size: 1rem
+    letter-spacing: 1px
+    .call-wrapper
+        width: 171px;
+        height: 21px;
+        border-radius: 10px;
+        background-color: #262526;
+        line-height: 20px;
+        color: #ffffff;
+
+
+    .currency-select
+        width: 65px
+
+
+
+    header
+        padding-bottom: 5px
+
+    .homelink
+        position: absolute
+        margin-left: -40px
+    .logo
+        position: relative
+        .theLogo img
+            max-width: 400px
+
+    @media screen and (max-width: 576px)
+        .theLogo img
+            max-width: 230px !important
+
+    .menubar
+        position: absolute
+        bottom: 0px
+        left: 0px
+        right: 0px
+        // font-size: 19px
+        // letter-spacing: 2px
+
+    .menubar ul
+        width: 100%
+
+    .menubar ul li
+        display: inline-block
+
+    .menubar ul li div
+        color: #000
+        margin-left: 30px
+
+    .menubar ul li:nth-child(5)
+
+
+    .menuItem
+        cursor: pointer
+
+    .mobileMenu
+        @extend .menuItem
+        font-size: 32px
+
+    @media screen and (min-width: 768px)
+        .mobileMenuContent
+            display: none
+
+    .mobileSearchForm
+        display: flex
+        justify-content: center
+        height: 100% 
+        margin-right: 25px
+
+    .social-icon
+        img
+            height: 30px
+
+    .userMenuButton
+        background: none
+        border: none
+
+    .top-social-icon
+        form
+            float: left
+
+    button.mat-menu-item
+        background: #86AA95
+        color: white
+        line-height: 40px
+        height: 40px
+
+    .mat-divider
+        color: white
+
+    ::ng-deep
+        .mat-menu-panel
+            background: #86AA95
+
+    @media screen and (max-width: 1024px)
+        .logo
+            font-size: 12px !important
+        .mobileSearchForm
+            font-size: 1.5rem
+        .mobileSearchForm div
+            border-radius: 10px
+            margin-bottom: 20px
+            padding: 10px
+            background-color: antiquewhite
+        .mobileSearchForm div input
+            border: none
+            background-color: antiquewhite

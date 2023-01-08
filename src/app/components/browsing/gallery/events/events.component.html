@@ -1,0 +1,37 @@
+<div _ngcontent-c16="" class="gallery-banner">
+  <div _ngcontent-c16="" class="container-fluid">
+    <div _ngcontent-c16="" class="row">
+      <div _ngcontent-c16="" class="col-lg-6 col-xs-12">
+        <div _ngcontent-c16="" class="gallery-banner-img">
+          <img _ngcontent-c16="" class="img-responsive" src="http://images.lestroisfleurs.com/images/cdn/gallery/events.jpg">
+        </div>
+
+      </div>
+      <div _ngcontent-c16="" class="col-lg-6 col-xs-12">
+        <div _ngcontent-c16="" class="gall-containt-section">
+          <h3 _ngcontent-c16="">EVENTS</h3>
+          <h4 _ngcontent-c16=""><i _ngcontent-c16="">Let us design a one of a kind event</i></h4>
+          <p>We are specialised in giving your event the “wow” factor while always keeping your budget in mind... We work
+            with all budgets and all types of celebrations from private parties, corporate events to weddings.</p>
+          <p>At Les Trois Fleurs, we go the extra mile to ensure your ﬂowers are more than a memory. Our wedding consultants
+            can offer lot of beautiful style suggestions in an effort to create the overall look you hope to achieve. With
+            our talent, creativity and experience, we will help you create a one of a kind event, with classic traditional
+            bouquets, or more modern cutting-edge styles in bridal and wedding ﬂowers. We have got some amazing value packages
+            to ﬁt any budget.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="masonryContainer">
+  <ngx-masonry [options]="masonryOptions"  class="masonryHolder">
+    <ngxMasonryItem *ngFor="let picture of masonryImages; let i = index" class="masonry-item col-12 col-md-6 col-lg-4 col-xl-3">
+      <div class="imgModaler" (click)="openDialog(picture.Title, imgURL + picture.ImageURL)">
+        <img src="{{imgURL + picture.ImageURL}}">
+      </div>
+    </ngxMasonryItem>
+  </ngx-masonry>
+</div>
+
+<div class="col-12 text-center" *ngIf="cntToLoad < maxToLoad"><span class="btn see-more-btn" (click)="loadMore()">SEE MORE</span></div>

@@ -1,0 +1,31 @@
+<div *ngIf="cart.cartProducts.length" class="badge" [matMenuTriggerFor]="cartMenu" [matBadge]="cart.cartProducts.length" matBadgeOverlap="true">
+  <img src="assets/images/cart-icon.png" />
+</div>
+<div *ngIf="cart.cartProducts.length==0" [matMenuTriggerFor]="cartMenu">
+  <img src="assets/images/cart-icon.png" />
+</div>
+<mat-menu #cartMenu xPosition="before">
+  <menu mat-menu-item class="row justify-content-between">
+    <div style="display: flex; justify-content: space-between;">
+      <span><h3>My Cart({{ cart.cartProducts.length }})</h3></span>
+      <mat-icon>close</mat-icon>
+  </div>
+  </menu>
+  <menu
+    mat-menu-item
+    *ngFor="let cp of cart.cartProducts"
+    class="row jusify-content-between select-img"
+  >
+    <img src="{{ getCartProductImage(cp) }}" alt="{{ cp.product.Name }}" class="col-4"/>
+    <div>
+      <span><h4>{{ cp.product.Name }}</h4></span>
+      <span><h4>AED {{ calculateUnitPrice(cp) }} x {{ cp.quantity }}</h4></span>
+    </div>
+    <i class="fa fa-trash-alt" (click)="removeItem(cp)" click-stop-propagation></i>
+  </menu>
+  <menu mat-menu-item class="row justify-content-between cart-total">
+    <span ><h3>CART TOTAL</h3></span>
+    <span><h3>AED {{ calculateSubTotal() }}</h3></span>
+  </menu>
+  <menu mat-menu-item class="proceed"><a (click)="checkout()"> PROCEED TO CHECKOUT </a></menu>
+</mat-menu>

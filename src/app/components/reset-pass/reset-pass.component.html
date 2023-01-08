@@ -1,0 +1,21 @@
+<div class="container-fluid page-hadding">
+    <div class="hadding">
+      <h2>PASSWORD RESET</h2>
+    </div>
+  </div>
+  <!--====== Hadding End ======-->
+  <div class="checkout-sectiom">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-6">
+          <div class="login-from">
+            <form [formGroup]="registerForm" (submit)='resetPass()'>
+              <label for="email" id="email">Email</label>
+              <input type="email" name="email" placeholder="Email" id="email" required="" formControlName="email">
+              <input type="submit" value="RESET">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

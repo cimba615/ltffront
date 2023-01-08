@@ -1,0 +1,41 @@
+<div class="gallery-banner">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-xs-12">
+        <div class="gallery-banner-img">
+          <img src="http://images.lestroisfleurs.com/images/cdn/gallery/landscaping.jpg" class="img-responsive">
+        </div>
+
+      </div>
+      <div class="col-lg-6 col-xs-12">
+        <div class="gall-containt-section">
+          <h3>LANDSCAPING</h3>
+          <h4><i>Make your dream yard a reality!</i></h4>
+          <p>Our dedicated team offers you impeccable landscape design and execution services for both small and large-scale projects. Moreover, we take care of your beloved plants’ maintenance for long lasting
+results.</p>	
+<p>The design process involves careful examination of the area followed by thorough research on the most
+suitable plants to be used, all whilst keeping in mind your unique requests and desired general look and
+ambiance.</p>
+<p>As for the execution, you can sit back, relax, and simply wait for your space to turn into one full of
+blooms! The team then gives you detailed yet simple instructions for the proper care of each element.
+As they say, nature works in mysterious ways. This is why it is important to carry out regular
+maintenance visits to keep your landscape beautiful all year round! Our maintenance services include
+fertilization, spring cleanup, insect treatment, pruning, and trimming using the proper tools.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="masonryContainer">
+  <ngx-masonry [options]="masonryOptions"  class="masonryHolder">
+    <ngxMasonryItem *ngFor="let picture of masonryImages; let i = index" class="masonry-item col-12 col-md-6 col-lg-4 col-xl-3">
+      <div class="imgModaler" (click)="openDialog(picture.Title, imgURL + picture.ImageURL)">
+        <img src="{{imgURL + picture.ImageURL}}">
+      </div>
+    </ngxMasonryItem>
+  </ngx-masonry>
+</div>
+
+<div class="col-12 text-center" *ngIf="cntToLoad < maxToLoad"><span class="btn see-more-btn" (click)="loadMore()">SEE MORE</span></div>

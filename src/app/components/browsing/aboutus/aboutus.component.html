@@ -1,0 +1,86 @@
+<div class="container-fluid page-hadding">
+  <div class="hadding">
+    <h2>CONTACT US</h2>
+  </div>
+</div>
+<!--====== Heading End ======-->
+<div class="container-fluid">
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active about-banner">
+        <img src="assets/images/Asset%2075.png" alt="" class="img-responsive">
+        <div class="slider-contant">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--====== Slider End ======-->
+<div class="container">
+  <div class="about-dt text-center">
+   <p>{{aboutusText}}</p> 
+  </div>
+</div>
+<!--====== Text Content End ======-->
+<div class="container">
+  <div class="about-contact-from">
+    <div class="row">
+      <div class="col-lg-7 col-xs-12">
+        <div class="contact-us">
+          <form [formGroup]="contactForm">
+            <input type="text" placeholder="Name" formControlName="name" name="name">
+            <input type="email" placeholder="Email" formControlName="email" name="email">
+            <input type="text" placeholder="Subject" formControlName="subject" name="subject">
+            <textarea placeholder="Message" rows="6" formControlName="message"></textarea>
+            <div class="row afterForm">
+              <div class="col-lg-9 col-sm-6 col-xs-12 googleCaptcha">
+                <re-captcha (resolved)="resolved($event)" siteKey="{{ RecaptchaKey }}"></re-captcha>
+              </div>
+              <div class="col-lg-3 col-sm-6 col-xs-12 sendButton">
+                <button mat-button [disabled]="!captchaPassed || !contactForm.valid" (click)="submitContactForm()" class="submit-button">SEND</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-5 col-xs-12">
+        <div class="contact-maps">
+          <div class="add-name">
+            <ul>
+              <li><i class="fas fa-map-marker-alt"></i></li>
+              <li>Ashrafieh, Nahr Street</li>
+            </ul>
+          </div>
+          <div class="google-erth">
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="17">
+              <agm-marker [latitude]="lat" [longitude]="lng">
+                <agm-info-window>
+                  Les Trois Fleurs
+                  <br>
+                  <a target ="_blank" href="https://www.google.com/maps/place/Les+Trois+Fleurs/@33.8966187,35.5322327,18.25z/data=!4m12!1m6!3m5!1s0x151f165ca514864f:0xcce0a1860d6ea1e0!2sLes+Trois+Fleurs!8m2!3d33.896511!4d35.53217!3m4!1s0x151f165ca514864f:0xcce0a1860d6ea1e0!8m2!3d33.896511!4d35.53217">
+                    View on Google Maps
+                  </a>
+                </agm-info-window>
+              </agm-marker>
+            </agm-map>
+          </div>
+          <div class="contact-email">
+            <ul>
+              <li><i class="far fa-envelope"></i></li>
+              <li><a href="mailto:ehanna@lestroisfleurs.com">ehanna@lestroisfleurs.com</a></li>
+
+            </ul>
+          </div>
+          <div class="phone-num">
+            <ul>
+              <li><i class="fas fa-phone"></i></li>
+              <li>+961 1 445 967 <br> +961 3 457 765</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

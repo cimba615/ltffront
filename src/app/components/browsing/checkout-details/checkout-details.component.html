@@ -1,0 +1,899 @@
+<div class="container-fluid">
+  <form
+    [formGroup]="cartForm"
+    (submit)="orderSubmit()"
+    class="row checkout-container m-sm-5"
+  >
+    <div class="left-container col-12 col-sm-8">
+      <!-- <div class="row left-section-container mb-5">
+        <div class="section-order text-center">1</div>
+        <div class="m-3 col overflow-auto">
+          <div class="section-title mb-4">REGISTER</div>
+          <div class="section-description mb-4">
+            Welcome, we are glad you are here!
+          </div>
+          <div class="row">
+            <mat-form-field class="col-sm-6 col-12 p-0 pr-sm-3">
+              <mat-label>First Name</mat-label>
+              <input matInput placeholder="" />
+            </mat-form-field>
+            <mat-form-field class="col-sm-6 col-12 p-0 pl-sm-3">
+              <mat-label>Last Name</mat-label>
+              <input matInput placeholder="" />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="row col-sm-6 col-12 p-0">
+              <mat-form-field class="col-sm-2 col-12 p-0">
+                <mat-select [value]="selectedPhoneCode.dial_code">
+                  <mat-option
+                    *ngFor="let phoneCode of phoneCodes"
+                    [value]="phoneCode.dial_code"
+                    >{{ phoneCode.dial_code }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-12 col-sm p-0 px-sm-3">
+                <mat-label>Mobile</mat-label>
+                <input matInput placeholder="" />
+              </mat-form-field>
+            </div>
+            <mat-form-field class="col-sm-6 col-12 p-0 pl-sm-3">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="" />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="row mb-5 col-12 col-sm-6 p-0 pr-sm-3">
+              <mat-label>Create Password</mat-label>
+              <input matInput type="password" placeholder="" />
+              <mat-hint
+                >Password must be at least 6 characters and must contain at
+                least 1 digit.</mat-hint
+              >
+            </mat-form-field>
+          </div>
+          <mat-checkbox>Remember me</mat-checkbox>
+        </div>
+      </div> -->
+      <div class="row left-section-container mb-5">
+        <div class="section-order text-center">1</div>
+        <div class="m-3 col overflow-auto">
+          <div class="section-title mb-4">ORDER AND DELIVER DETAILS</div>
+          <div
+            class="row align-items-center order-details"
+            *ngFor="let cp of cart.cartProducts"
+          >
+            <div class="order-image col-12 col-sm-2 p-0">
+              <img
+                src="{{ getCartProductImage(cp) }}"
+                alt="{{ cp.product.Name }}"
+              />
+            </div>
+            <div class="order-description col-12 col-sm align-self-center">
+              <div class="m-2">{{ cp.product.Name }}</div>
+              <div class="m-2">{{ cp.product.Description }}</div>
+              <div class="m-2">AED {{ calculateTotalPrice(cp) }}</div>
+            </div>
+          </div>
+          <div class="my-5 deliver-details">
+            <div class="deliver-subtitle mb-4">Delivery on</div>
+            <div class="row">
+              <div class="col-sm-6 p-0 pr-sm-3 col-12 my-2">
+                <mat-form-field [hidden]="true">
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    formControlName="dDate"
+                    required
+                  />
+                  <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+                <button
+                  mat-button
+                  (click)="picker.open()"
+                  class="deliver-button"
+                  type="button"
+                >
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex overflow-auto">
+                      <mat-icon matPrefix>date_range</mat-icon>
+                      <div class="ml-1 deliver-button-text">
+                        {{
+                          cartForm.value.dDate
+                            ? datePipe.transform(
+                                cartForm.value.dDate,
+                                "MM/dd/yyyy"
+                              )
+                            : "Select Delivery Date"
+                        }}
+                      </div>
+                    </div>
+                    <div>
+                      <mat-icon matSuffix>keyboard_arrow_right</mat-icon>
+                    </div>
+                  </div>
+                </button>
+              </div>
+              <div class="col-sm-6 p-0 pl-sm-3 col-12 my-2">
+                <button
+                  mat-button
+                  (click)="openShippingMethodDialog()"
+                  class="deliver-button"
+                  type="button"
+                >
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex overflow-auto">
+                      <mat-icon matPrefix>local_shipping</mat-icon>
+                      <div class="ml-1 deliver-button-text">
+                        {{
+                          deliveryShippingMethod
+                            ? deliveryShippingMethodText()
+                            : "Select Shipping Method"
+                        }}
+                      </div>
+                    </div>
+                    <div>
+                      <mat-icon matSuffix>keyboard_arrow_right</mat-icon>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div class="row deliver-on-section">
+              <div class="col-sm-6 p-0 pr-sm-3 col-12 my-2">
+                <button mat-button class="deliver-button" type="button">
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex overflow-auto">
+                      <mat-icon matPrefix>place</mat-icon>
+                      <div class="ml-1 deliver-button-text">
+                        {{
+                          cartForm.value.city
+                            ? deliverCities[cartForm.value.city]
+                            : "Deliver to?"
+                        }}
+                      </div>
+                    </div>
+                    <div>
+                      <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+                    </div>
+                  </div>
+                  <mat-select
+                    required
+                    formControlName="city"
+                    class="hidden-select"
+                  >
+                    <mat-option
+                      *ngFor="let deliverCity of deliverCities | keyvalue"
+                      [value]="deliverCity.key"
+                      >{{ deliverCity.value }}</mat-option
+                    >
+                  </mat-select>
+                </button>
+              </div>
+              <div class="col-sm-6 p-0 pl-sm-3 col-12 my-2">
+                <button
+                  mat-button
+                  (click)="openTimeSlotDialog()"
+                  class="deliver-button"
+                  type="button"
+                >
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex overflow-auto">
+                      <mat-icon matPrefix>access_time_icon</mat-icon>
+                      <div class="ml-1 deliver-button-text">
+                        {{
+                          deliveryTimeSlot
+                            ? deliveryTimeSlot
+                            : "Select Time Slot"
+                        }}
+                      </div>
+                    </div>
+                    <div>
+                      <mat-icon matSuffix>keyboard_arrow_right</mat-icon>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="deliver-subtitle mb-4">Delivery Address</div>
+            <div class="row">
+              <mat-form-field class="col-sm-6 col-12 p-0 pr-sm-3">
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  placeholder=""
+                  formControlName="fName"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field class="col-sm-6 col-12 p-0 pl-sm-3">
+                <mat-label>Recipient's city</mat-label>
+                <input
+                  matInput
+                  placeholder=""
+                  formControlName="exactCity"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="row col-sm-6 col-12 p-0 phone-column">
+                <mat-form-field class="col-sm-2 col-12 p-0">
+                  <mat-select required formControlName="dPhone">
+                    <mat-option
+                      *ngFor="let phoneCode of phoneCodes"
+                      [value]="phoneCode.dial_code"
+                      >{{ phoneCode.dial_code }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-12 col-sm p-0 px-sm-3">
+                  <mat-label>Recipient's Mobile</mat-label>
+                  <input
+                    matInput
+                    placeholder=""
+                    formControlName="mPhone"
+                    required=""
+                  />
+                </mat-form-field>
+              </div>
+              <mat-form-field class="col-sm-6 col-12 p-0 pl-sm-3">
+                <mat-label>Landmark</mat-label>
+                <input matInput placeholder="" formControlName="nearby" />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="row col-12 col-sm-6 p-0 pr-sm-3">
+                <mat-label>Recipient's Address</mat-label>
+                <input
+                  matInput
+                  placeholder=""
+                  formControlName="building"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field class="row col-12 col-sm-6 p-0 pl-sm-3">
+                <mat-label>Recipient's Email(optional)</mat-label>
+                <input matInput placeholder="" formControlName="lName" />
+              </mat-form-field>
+            </div>
+
+            <div class="deliver-type my-4">Address Type</div>
+            <div class="row mb-4 deliver-type">
+              <mat-radio-group
+                aria-label="Select an option"
+                class="mb-4"
+                formControlName="street"
+                required=""
+              >
+                <mat-radio-button value="1" class="col-sm-auto p-0 col-12"
+                  >Home</mat-radio-button
+                >
+                <mat-radio-button
+                  value="2"
+                  class="col-sm-auto p-0 pl-sm-3 col-12"
+                  >Office</mat-radio-button
+                >
+                <mat-radio-button
+                  value="3"
+                  class="col-sm-auto p-0 pl-sm-3 col-12"
+                  >Other</mat-radio-button
+                >
+              </mat-radio-group>
+              <div class="w-100 d-none d-sm-block"></div>
+              <button
+                mat-button
+                class="ml-sm-0 mx-auto apply-button"
+                type="button"
+              >
+                SAVE AND DELIVER HERE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row left-section-container mb-5">
+        <div class="section-order text-center">2</div>
+        <div class="m-3 col overflow-auto">
+          <div class="section-title mb-4">BILLING INFORMATION</div>
+        
+          <div class="my-5 billing-details">
+       
+         
+           
+
+            <div class="row">
+              <mat-form-field class="col-sm-6 col-12 p-0 pr-sm-3">
+                <mat-label>Name / Company Name</mat-label>
+                <input
+                  matInput
+                  placeholder=""
+                  formControlName="billingName"
+                  required
+                />
+              </mat-form-field>
+              <mat-form-field class="col-sm-6 col-12 p-0 pl-sm-3">
+                <mat-label>VAT #</mat-label>
+                <input
+                  matInput
+                  placeholder=""
+                  formControlName="billingTVA"
+                  required
+                />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="row col-sm-6 col-12 p-0 phone-column">
+                <mat-form-field class="col-sm-2 col-12 p-0">
+                  <mat-select required formControlName="billingPhoneCode">
+                    <mat-option
+                      *ngFor="let phoneCode of phoneCodes"
+                      [value]="phoneCode.dial_code"
+                      >{{ phoneCode.dial_code }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-12 col-sm p-0 px-sm-3">
+                  <mat-label>Mobile</mat-label>
+                  <input
+                    matInput
+                    placeholder=""
+                    formControlName="billingPhoneNumber"
+                    required=""
+                  />
+                </mat-form-field>
+
+                
+              </div>
+              <mat-form-field class="col-sm-6 col-12 p-0 pl-sm-3">
+                <mat-label>Address</mat-label>
+                <input
+                  matInput
+                  placeholder=""
+                  formControlName="billingAddress"
+                  required
+                />
+              </mat-form-field>
+            </div>
+          
+
+            
+          </div>
+        </div>
+      </div>
+      <div class="d-flex left-section-container mb-5">
+        <div class="section-order text-center">3</div>
+        <div class="m-3 section-content">
+          <div class="section-title mb-4">PAYMENT OPTIONS</div>
+          <mat-radio-group
+          aria-label="Select an option"
+          class="mb-12"
+          formControlName="paymentMethod"
+          required=""
+        >
+          <mat-radio-button value="Cash On Delivery" class="col-sm-auto p-0 col-12"
+            >Cash On Delivery</mat-radio-button
+          >
+          <mat-radio-button
+            value="Credit or Debit Card"
+            class="col-sm-auto p-0 pl-sm-3 col-12"
+            >Credit or Debit Card</mat-radio-button
+          >
+          <mat-radio-button
+            value="PayPal"
+            class="col-sm-auto p-0 pl-sm-3 col-12"
+            >PayPal</mat-radio-button
+          >
+        </mat-radio-group>
+        </div>
+      </div>
+    </div>
+    <div class="right-container ml-auto col-sm-3 col-12 mb-5">
+      <div class="d-flex flex-column right-section-container p-4 mb-5">
+        <div class="price-title mb-4">PRICE DETAILS</div>
+        <div
+          class="d-flex justify-content-between align-items-center price-content"
+        >
+          <div>Total product price</div>
+          <div>AED {{ calculateSubTotal() }}</div>
+        </div>
+        <div
+          class="d-flex justify-content-between align-items-center price-content"
+        >
+          <div>Shipping</div>
+          <div>AED {{ calculateDelivery() }}</div>
+        </div>
+        <div
+          class="d-flex justify-content-between align-items-center price-title my-3"
+        >
+          <div>Total</div>
+          <div>AED {{ calculateTotal() }}</div>
+        </div>
+        <div class="price-divider mb-3"></div>
+        <div class="text-center price-coupon">Have a Discount Coupon?</div>
+      </div>
+      <div class="ml-3 price-footer">LES TROIS FLEURS SECURE</div>
+    </div>
+    <mat-checkbox
+      class="col-12 col-sm-auto agree-terms mb-4"
+      color="warn"
+      formControlName="apartment"
+      required
+    >
+      I agree to the
+      <a href="checkoutDetails">Terms and Conditions / Disclaimer</a>
+    </mat-checkbox>
+    <div class="w-100 d-none d-sm-block"></div>
+    <button
+      mat-button
+      [disabled]="!agreeTerms.flag"
+      class="ml-sm-3 mx-auto apply-button mb-5"
+    >
+      PROCEED TO CHECKOUT
+    </button>
+  </form>
+
+  <!-- <div class="checkout-form-section">
+    <form [formGroup]="cartForm" class="col-12" (submit)="orderSubmit()">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-hadding">
+            <h4>DELIVERY DETAILS</h4>
+          </div>
+          <div class="form-section">
+            <div class="row col-12 noPadding">
+              <label class="warningRed"
+                >This is the person we will be delivering the purchased items
+                to</label
+              >
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="f-name">First Name</label>
+              </div>
+              <div class="col-8 col-md-9 col-lg-10 noPadding">
+                <input
+                  type="text"
+                  name="f-name"
+                  id="f-name"
+                  required=""
+                  formControlName="fName"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-name">Last Name</label>
+              </div>
+              <div class="col-8 col-md-9 col-lg-10 noPadding">
+                <input
+                  type="text"
+                  name="l-name"
+                  id="l-name"
+                  formControlName="lName"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="d-phone">Daytime Phone</label>
+              </div>
+              <div class="col-8 col-md-3 col-lg-4 noPadding">
+                <input
+                  type="text"
+                  name="d-phone"
+                  id="d-phone"
+                  required=""
+                  formControlName="dPhone"
+                />
+              </div>
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="m-phone" class="offset-md-4">Mobile Phone</label>
+              </div>
+              <div class="col-8 col-md-3 col-lg-4 noPadding">
+                <input
+                  type="text"
+                  name="m-phone"
+                  id="m-phone"
+                  required=""
+                  formControlName="mPhone"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-building">Building</label>
+              </div>
+              <div class="col-8 col-md-9 col-lg-10 noPadding">
+                <input
+                  type="text"
+                  name="l-building"
+                  id="l-building"
+                  formControlName="building"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-apartment">Apartment</label>
+              </div>
+              <div class="col-8 col-md-3 col-lg-4 noPadding">
+                <input
+                  type="text"
+                  name="l-apartment"
+                  id="l-apartment"
+                  required=""
+                  formControlName="apartment"
+                />
+              </div>
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="m-floor" class="offset-md-4">Floor</label>
+              </div>
+              <div class="col-8 col-md-3 col-lg-4 noPadding">
+                <input
+                  type="text"
+                  name="m-floor"
+                  id="m-fl"
+                  required=""
+                  formControlName="floor"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-street">Street</label>
+              </div>
+              <div class="col-8 col-md-9 col-lg-10 noPadding">
+                <input
+                  type="text"
+                  name="l-street"
+                  id="l-str"
+                  formControlName="street"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-city">City</label>
+              </div>
+              <div class="col-8 col-md-9 col-lg-10 noPadding">
+                <select name="l-city" id="l-city" formControlName="city">
+                  <optgroup *ngFor="let zone of zones" label="{{ zone.Name }}">
+                    <option
+                      *ngFor="let city of zone.Cities"
+                      value="{{ city.ID }}"
+                    >
+                      {{ city.Name }}
+                    </option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <label class="warningRed"
+                >** Extra delivery charges applicable for deliveries outside of
+                Beirut</label
+              >
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-landmark">Nearby Landmark</label>
+              </div>
+              <div class="col-8 col-md-9 col-lg-10 noPadding">
+                <input
+                  type="text"
+                  name="l-landmark"
+                  id="l-landmark"
+                  formControlName="nearby"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-message">Message, Greeting</label>
+              </div>
+              <div class="col-8 col-md-9 col-lg-10 noPadding">
+                <input
+                  type="text"
+                  name="l-message"
+                  id="l-message"
+                  formControlName="greeting"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-messageName">Add my name to the message</label>
+              </div>
+              <div class="col-8 col-md-9 col-lg-10 noPadding">
+                <input
+                  type="text"
+                  name="l-messageName"
+                  id="l-messageName"
+                  formControlName="senderName"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-comments">Comments</label>
+              </div>
+              <div class="col-8 col-md-9 col-lg-10 noPadding">
+                <input
+                  type="text"
+                  name="l-comments"
+                  id="l-comments"
+                  formControlName="comment"
+                />
+              </div>
+            </div>
+            <div class="row col-12 noPadding">
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-date">Date of delivery</label>
+              </div>
+              <div class="col-8 col-md-3 col-lg-4 noPadding">
+                <select id="dDate" name="dDate" formControlName="dDate">
+                  <option></option>
+                  <option *ngFor="let x of datelist" ng-value="x">
+                    {{ x }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-4 col-md-3 col-lg-2 noPadding">
+                <label for="l-time" class="offset-md-4">Time</label>
+              </div>
+              <div class="col-8 col-md-3 col-lg-4 noPadding">
+                <select
+                  id="deliveryTime"
+                  name="deliveryTime"
+                  formControlName="dTime"
+                >
+                  <option value="10">From 10:00 to 12:00</option>
+                  <option value="12" selected="selected">
+                    From 12:00 to 14:00
+                  </option>
+                  <option value="14">From 14:00 to 16:00</option>
+                  <option value="16">From 16:00 to 18:00</option>
+                  <option value="18">From 18:00 to 20:00</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 text-contant">
+          <div class="checkproduct d-none d-md-block">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Image</td>
+                  <td>Product Name</td>
+                  <td>Quantity</td>
+                  <td>Unit price</td>
+                  <td>Total</td>
+                </tr>
+                <tr style="height: 100px" *ngFor="let cp of cart.cartProducts">
+                  <td>
+                    <div class="select-image">
+                      <img
+                        src="{{ getCartProductImage(cp) }}"
+                        alt="{{ cp.product.Name }}"
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <div style="margin-top: 13px">
+                      <h4>{{ cp.product.Name }}</h4>
+                      <p>{{ cp.product.Description }}</p>
+                      <ng-container *ngIf="cp.variant">
+                        <h5 style="margin-top: 20px">Size:</h5>
+                        <div class="row">
+                          <div class="sizeDiv">{{ cp.variant.Name }}</div>
+                        </div>
+                      </ng-container>
+                      <h5 style="margin-top: 20px">Addons:</h5>
+                      <div class="addons">
+                        <img
+                          *ngFor="let si of cp.addons"
+                          src="{{ imgURL + si.Image }}"
+                          alt="{{ si.Name }}"
+                          style="
+                            float: left;
+                            margin: 0 10px;
+                            width: 120px;
+                            height: 150px;
+                          "
+                        />
+                        <span *ngIf="cp.addons.length === 0">None</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: middle">
+                    <div class="number-spiner">
+                      <div class="nice-number">
+                        <div class="nice-number">
+                          <button type="button" (click)="decrease(cp)">
+                            <i class="fas fa-caret-left"></i>
+                          </button>
+                          <input type="number" value="{{ cp.quantity }}" />
+                          <button type="button" (click)="increase(cp)">
+                            <i class="fas fa-caret-right"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: middle">
+                    <div>{{ calculateUnitPrice(cp) }}$</div>
+                  </td>
+                  <td style="vertical-align: middle">
+                    <div>{{ calculateTotalPrice(cp) }}$</div>
+                    <div class="remover" (click)="removeItem(cp)">X</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td colspan="2">Sub-Total</td>
+                  <td>{{ calculateSubTotal() }}$</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td colspan="2">Delivery</td>
+                  <td>{{ calculateDelivery() }}$</td>
+                </tr>
+                <tr *ngIf="discount">
+                  <td></td>
+                  <td></td>
+                  <td colspan="2">Discount</td>
+                  <td>{{ discount }}$</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>Total</td>
+                  <td></td>
+                  <td>{{ calculateTotal() }}$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="checkproduct d-md-none">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Image</td>
+                  <td>Product Name</td>
+                </tr>
+                <ng-container *ngFor="let cp of cart.cartProducts">
+                  <tr style="height: 100px">
+                    <td>
+                      <div class="select-image">
+                        <img src="{{ getCartProductImage(cp) }}" alt="" />
+                      </div>
+                    </td>
+                    <td>
+                      <div style="margin-top: 13px">
+                        <h4>{{ cp.product.Name }}</h4>
+                        <p>{{ cp.product.Description }}</p>
+                        <ng-container *ngIf="cp.variant">
+                          <h5>Size:</h5>
+                          <div class="row">
+                            <div class="sizeDiv">{{ cp.variant.Name }}</div>
+                          </div>
+                        </ng-container>
+                        <h5 style="margin-top: 20px">Addons:</h5>
+                        <div class="addons">
+                          <img
+                            *ngFor="let si of cp.addons"
+                            src="{{ imgURL + si.Image }}"
+                            alt="{{ si.Name }}"
+                            style="
+                              float: left;
+                              margin: 0 10px;
+                              width: 120px;
+                              height: 150px;
+                            "
+                          />
+                          <span *ngIf="cp.addons.length === 0">None</span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Quantity</td>
+                    <td>
+                      <div class="number-spiner">
+                        <div class="nice-number">
+                          <div class="nice-number">
+                            <button type="button" (click)="decrease(cp)">
+                              <i class="fas fa-caret-left"></i>
+                            </button>
+                            <input
+                              type="number"
+                              value="{{ cp.quantity }}"
+                              style="width: 2ch"
+                            />
+                            <button type="button" (click)="increase(cp)">
+                              <i class="fas fa-caret-right"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Unit Price</td>
+                    <td>
+                      <div>{{ calculateUnitPrice(cp) }}$</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td>
+                      <div>{{ calculateTotalPrice(cp) }}$</div>
+                      <div class="remover" (click)="removeItem(cp)">X</div>
+                    </td>
+                  </tr>
+                </ng-container>
+                <tr style="border-top: solid 2px #86aa95">
+                  <td>Sub-Total</td>
+                  <td>{{ calculateSubTotal() }}$</td>
+                </tr>
+                <tr>
+                  <td>Delivery</td>
+                  <td>{{ calculateDelivery() }}$</td>
+                </tr>
+                <tr *ngIf="discount">
+                  <td>Discount</td>
+                  <td>{{ discount }}$</td>
+                </tr>
+                <tr>
+                  <td>Grand Total</td>
+                  <td>{{ calculateTotal() }}$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row col-12">
+          <div class="row col-lg-6 col-sm-12 noPadding bottomRow">
+            <div class="col-6 noPadding">
+              <label for="l-coupon">Coupon Code</label>
+            </div>
+            <div class="col-6 noPadding form-section">
+              <input
+                type="text"
+                name="l-coupon"
+                id="l-coupon"
+                formControlName="coupon"
+              />
+            </div>
+          </div>
+          <div
+            class="col-lg-6 col-sm-12 noPadding"
+            *ngIf="cache.cart.cartProducts.length"
+          >
+            <div class="confirm-btn col-sm-12">
+              <input
+                type="submit"
+                style="display: none"
+                name="submit2"
+                (click)="orderSubmit2()"
+                value="Bank Transfer Payment"
+              />
+              <br /><br />
+              <input type="submit" name="submit" value="Credit Card Payment" />
+            </div>
+          </div>
+          <img
+            src="http://lestroisfleurs.com/poweredby2.png"
+            style="width: 150px; float: left; height: 45px; display: block"
+          />
+        </div>
+      </div>
+    </form>
+  </div> -->
+</div>

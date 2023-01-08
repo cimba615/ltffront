@@ -1,0 +1,21 @@
+<div mat-dialog-title>
+  <div class="d-flex justify-content-between mb-5">
+    <mat-icon matPrefix>keyboard_arrow_left</mat-icon>
+    <div>Select Time Slot</div>
+    <mat-icon matSuffix (click)="onNoClick()" class="close-button"
+      >close</mat-icon
+    >
+  </div>
+</div>
+<div mat-dialog-content>
+  <mat-radio-group aria-label="Select an option" [(ngModel)]="data">
+    <div
+      *ngFor="let timeSlot of timeSlots"
+      class="radio-wrapper d-flex mb-4 pl-3"
+    >
+      <mat-radio-button [value]="timeSlot">{{
+        timeSlot
+      }}</mat-radio-button>
+    </div>
+  </mat-radio-group>
+</div>

@@ -1,0 +1,131 @@
+<header>
+  <div class="row logo container-fluid">
+    <div class="row m-4 w-100 justify-content-end align-items-center">
+      <div class="col-auto p-0 mr-2">Call Us</div>
+      <div class="col-auto p-0 mr-2 call-wrapper pl-4 pr-1">+971322233333</div>
+      <div class="col-auto p-0 mr-2">|</div>
+      <mat-select [(ngModel)]="currency" class="currency-select">
+        <mat-option value="1">AED</mat-option>
+        <mat-option value="2">USD</mat-option>
+        <mat-option value="3">GBP</mat-option>
+      </mat-select>
+    </div>
+
+    <div
+      class="top-social-icon row mx-5 w-100 justify-content-end align-items-center"
+      *ngIfMediaQuery="'(min-width: 768px)'"
+    >
+        <mat-search-bar [(ngModel)]="searchValue1" style="height: 100%; margin-right: 25px;"></mat-search-bar>
+      <div
+        class="menuItem social-icon col-auto p-0 mr-4"
+      >
+        <ltf-cart></ltf-cart>
+      </div>
+      <div
+        class="menuItem social-icon col-auto p-0"
+        [routerLink]="['/profile']"
+      >
+        <div><img src="assets/images/user.png" /></div>
+      </div>
+    </div>
+
+    <div class="row mx-md-5 w-100 justify-content-between align-items-center">
+      <a class="theLogo" href="#" [routerLink]="['/']">
+        <img src="assets/images/Asset 1.png" />
+      </a>
+      <div *ngIfMediaQuery="'(min-width: 768px)'" class="col mt-5">
+        <nav class="row menubar">
+          <ul>
+            <!-- <li class="homelink">
+              <div class="menuItem" [routerLink]="['/']">
+                <i class="fas fa-home"></i>
+              </div>
+            </li> -->
+            <li>
+              <div class="menuItem" [routerLink]="['/occasions']">
+                COLLECTION
+              </div>
+            </li>
+            <li>
+              <div class="menuItem" [routerLink]="['/flowers']">FLOWERS</div>
+            </li>
+            <li>
+              <div class="menuItem" [routerLink]="['/plants']">PLANTS</div>
+            </li>
+
+            <li>
+              <div class="menuItem" [routerLink]="['/gifts']">
+                GIFTS &amp; SWEETS
+              </div>
+            </li>
+            <li>
+              <div class="menuItem" [routerLink]="['/gallery/weddings']">
+                SERVICES
+              </div>
+            </li>
+            <li>
+              <div class="menuItem" [routerLink]="['/aboutus']">BOUTIQUE</div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="top-social-icon mobileMenuContent">
+        <mat-menu #appMenu="matMenu" xPosition="before" yPosition="below">
+          <button mat-menu-item [routerLink]="['/checkoutDetails']">
+            <mat-icon>local_grocery_store</mat-icon>
+            <span>My Cart</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item [routerLink]="['/flowers']">
+            <mat-icon>local_florist</mat-icon>
+            <span>Flowers</span>
+          </button>
+          <button mat-menu-item [routerLink]="['/plants']">
+            <mat-icon>spa</mat-icon>
+            <span>Plants</span>
+          </button>
+          <button mat-menu-item [routerLink]="['/occasions']">
+            <mat-icon>cake</mat-icon>
+            <span>Occasions</span>
+          </button>
+          <button mat-menu-item [routerLink]="['/gifts']">
+            <mat-icon>pages</mat-icon>
+            <span>Gifts &amp; Sweets</span>
+          </button>
+          <button mat-menu-item [routerLink]="['/gallery/weddings']">
+            <mat-icon>image</mat-icon>
+            <span>Gallery</span>
+          </button>
+          <button mat-menu-item [routerLink]="['/aboutus']">
+            <mat-icon>public</mat-icon>
+            <span>Contact Us</span>
+          </button>
+          <mat-divider *ngIf="isLoggedIn"></mat-divider>
+          <button mat-menu-item *ngIf="isLoggedIn" [routerLink]="['/profile']">
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item *ngIf="isLoggedIn" (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+        <button [matMenuTriggerFor]="appMenu" class="userMenuButton">
+          <i
+            class="fas fa-bars mobileMenu"
+            *ngIfMediaQuery="'(max-width: 767px)'"
+          ></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 mb-3" *ngIfMediaQuery="'(max-width: 767px)'">
+    <form [formGroup]="searchForm" class="mobileSearchForm">
+      <div class="search-from mobile">
+        <input type="text" formControlName="query" (keydown)="onSearchKeydown($event)">
+        <i class="fas fa-search" (click)="goToPorducts()"></i>
+      </div>
+    </form>
+  </div>
+</header>

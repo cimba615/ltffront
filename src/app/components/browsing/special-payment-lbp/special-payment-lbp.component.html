@@ -1,0 +1,37 @@
+<!-- <form [formGroup]="paymentForm">
+  <input type="text" name="name" formControlName="name">
+  <input type="email" name="email" formControlName="email">
+  <input type="text" name="phone" formControlName="phone">
+  <input type="number" name="amountPayable" formControlName="amountPayable">
+  <button type="button" (click)="submitPayment()">SUBMIT</button>
+</form> -->
+<div class="container-fluid page-hadding">
+    <div class="hadding">
+      <h2>SPECIAL PAYMENT</h2>
+    </div>
+  </div>
+  <!--====== Hadding End ======-->
+  <div class="checkout-sectiom">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="guest-form">
+            <h4>PAYMENT DETAILS</h4>
+  
+            <form [formGroup]="paymentForm">
+              <label for="name">Name</label>
+              <input type="text" name="name" formControlName="name" placeholder="Name" required="">
+              <label for="name">Email</label>
+              <input type="email" name="email" formControlName="email" placeholder="Email" required="">
+              <label for="name">Phone</label>
+              <input type="text" name="phone" formControlName="phone" placeholder="Phone" required="">
+              <label for="name">Amount in LBP</label>
+              <input type="number" name="amountPayable" formControlName="amountPayable" placeholder="Amount" required="">
+              <input type="button" value="Pay With Card" (click)="processPaymentLBP()">
+             
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

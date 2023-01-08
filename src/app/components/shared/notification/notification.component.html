@@ -1,0 +1,18 @@
+<div class="dialog">
+    <div class="col-12">
+      <div [class]="symbolClass">
+        <div class="content" [innerHTML]="iconSymbol"></div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="oops col-12">
+        {{headerText}}
+      </div>
+    </div>
+    <h1> {{errorMessage}}</h1>
+    <div class="col-12 okHolder">
+        <button class="mat-button" (click)="close()">
+          OK
+        </button>
+    </div>
+  </div>

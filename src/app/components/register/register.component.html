@@ -1,0 +1,27 @@
+<div class="container-fluid page-hadding">
+  <div class="hadding">
+    <h2>REGISTRATION</h2>
+  </div>
+</div>
+<!--====== Hadding End ======-->
+<div class="checkout-sectiom">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-6">
+        <div class="login-from">
+          <form [formGroup]="registerForm" (submit)='onSubmit()'>
+            <label for="email" id="email">Email</label>
+            <input type="email" name="email" placeholder="Email" id="email" required="" formControlName="email">
+            <label for="password" id="password">Password</label>
+            <input type="password" name="password" placeholder="Password" id="password" required="" formControlName="password">
+            <label for="cPassword" id="cPassword">Confirm Password</label>
+            <input type="password" name="cPassword" placeholder="Confirm Password" id="cPassword" required="" formControlName="cPassword">
+            <input type="checkbox" name="newsletter" formControlName="newsletter">
+            <label for="checkbox">Newsletter</label>
+            <input type="submit" value="Register">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

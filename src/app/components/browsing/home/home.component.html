@@ -1,0 +1,89 @@
+<!--====== Slider Start ======-->
+<div class="container-fluid">
+  <ngb-carousel>
+    <ng-template ngbSlide *ngFor="let banner of banners">
+      <img src="{{ImgURL + banner.ImageURL}}" alt="{{banner.Title}}">
+      <!-- <div class="carousel-fader">
+        
+      </div> -->
+      <div class="carousel-caption">
+        <h3>{{banner.Title}}</h3>
+        <p>{{banner.Text}}</p>
+        <div class="shop-btn"><a class="btn" (click)="actionClick(banner.Action, banner.Param)">{{banner.ButtonText}}</a></div>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
+<!--====== BUNDLES ======-->
+<div class="offset-sm-1 offset-xl-2 col-sm-10 col-xl-8" *ngIf="bundles && bundles.length">
+  <div class="row" class="best-seller">
+    <div class="text-left">
+      <h4>OFFERS</h4>
+    </div>
+    <div class="undet-line">
+      <hr>
+    </div>
+  </div>
+  <div class="product-section">
+    <div class="row row-eq-height">
+      <div *ngFor="let bundle of bundles" class="col-lg-4 col-md-6 col-xs-12">
+        <ltf-bundle [bundle]="bundle"></ltf-bundle>
+      </div>
+    </div>
+
+    <!-- <div class="text-center"><a href="#" class="btn see-more-btn">SEE MORE</a></div> -->
+  </div>
+</div>
+<!--====== BEST SELLERS ======-->
+<div class="offset-sm-1 offset-xl-2 col-sm-10 col-xl-8">
+  <div class="row" class="best-seller">
+    <div class="text-left">
+      <h4>BEST SELLER</h4>
+    </div>
+    <div class="undet-line">
+      <hr>
+    </div>
+  </div>
+  <div class="product-section" id="productslisting">
+    <div class="row row-eq-height">
+      <div *ngFor="let product of products" class="col-lg-4 col-md-6 col-xs-12">
+        <ltf-product [product]="product" [source]="'home'" (shopProduct)="shopProduct($event)" (categFilter)="filterByCateg($event)"></ltf-product>
+      </div>
+    </div>
+
+    <!-- <div class="text-center"><a href="#" class="btn see-more-btn">SEE MORE</a></div> -->
+  </div>
+</div>
+<!--====== Gift Section ======-->
+<div class="container-fluid">
+  <div [routerLink]="['/gifts']" class="row home-page-gift">
+    <div class="col-sm-6 col-xs-12">
+      <div class="gifts-image">
+        <img src="{{giftIdeaImage}}" alt="GIFTS IDEAS" class="img-responsive">
+      </div>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+      <div class="gifts-details">
+        <div class="content">
+          <h3>GIFTS IDEAS</h3>
+          <p>{{giftIdeaText}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div [routerLink]="['/createBouquet']" class="row home-page-gift">
+   <div class="col-sm-6 col-xs-12">
+      <div class="gifts-details">
+        <div class="content">
+          <h3>CUSTOM BOUQUET</h3>
+          <p>{{customBouquetText}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+      <div class="gifts-image">
+        <img src="{{customBouquetImage}}" alt="CUSTOM BOUQUET" class="img-responsive">
+      </div>
+    </div>
+  </div>
+</div>

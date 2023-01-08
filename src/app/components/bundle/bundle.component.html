@@ -1,0 +1,9 @@
+<div class="product-item">
+  <div class="product-img text-center"><img src="{{imagesUrl}}{{bundle.Image}}">
+</div>
+  <div class="product-details">
+    <h3>{{bundle.Name}}</h3>
+    <h4 class="price">{{bundle.Price}}$</h4>
+    <div class="shop-btn" [routerLink]="['/shopBundle/' + bundle.Name.split(' ').join('_') + '/' + bundle.ID]"><a class="btn">Shop Now</a></div>
+  </div>
+</div>

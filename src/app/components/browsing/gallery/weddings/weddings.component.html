@@ -1,0 +1,36 @@
+<div _ngcontent-c16="" class="gallery-banner">
+  <div _ngcontent-c16="" class="container-fluid">
+    <div _ngcontent-c16="" class="row">
+      <div _ngcontent-c16="" class="col-lg-6 col-xs-12">
+        <div _ngcontent-c16="" class="gallery-banner-img">
+          <img _ngcontent-c16="" class="img-responsive" src="http://images.lestroisfleurs.com/images/cdn/gallery/weddings.jpg">
+        </div>
+
+      </div>
+      <div _ngcontent-c16="" class="col-lg-6 col-xs-12">
+        <div _ngcontent-c16="" class="gall-containt-section">
+          <h3 _ngcontent-c16="">WEDDINGS</h3>
+          <h4 _ngcontent-c16=""><i _ngcontent-c16="">Let us design a one of a kind event</i></h4>
+          <p>With more than 30 years of experience in wedding decoration, we guarantee a setup with extensive refinement on your big day. </p>
+          <p>We cater to all kinds of wedding sizes and styles, and offer custom-made designs to assure your awaited day is truly memorable. </p>
+            <p>We thoroughly discuss the most suitable elements and setup for your wedding, keeping in mind the mood you would like to exhibit, as well as your preferred arrangement styles, color schemes, and flower types. </p>
+              <p>The execution process involves utmost care and precision by skilled florists with years of experience, all whilst using the highest quality of floral elements. </p>
+                <p>Furthermore, we offer wedding planning services to find you the best deals and make sure all activities run smoothly. </p>
+                  <p>We are dedicated to making this day truly one of a kind. It is our pleasure to accompany you on this journey!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="masonryContainer">
+  <ngx-masonry [options]="masonryOptions"  class="masonryHolder">
+    <ngxMasonryItem *ngFor="let picture of masonryImages; let i = index" class="masonry-item col-12 col-md-6 col-lg-4 col-xl-3">
+      <div class="imgModaler" (click)="openDialog(picture.Title, imgURL + picture.ImageURL)">
+        <img src="{{imgURL + picture.ImageURL}}">
+      </div>
+    </ngxMasonryItem>
+  </ngx-masonry>
+</div>
+
+<div class="col-12 text-center" *ngIf="cntToLoad < maxToLoad"><span class="btn see-more-btn" (click)="loadMore()">SEE MORE</span></div>

@@ -1,0 +1,43 @@
+<div class="container-fluid page-hadding">
+    <div class="hadding">
+        <h2>CUSTOM BOUQUET</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="floweraddcart-section">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+                <div class="all-price-section">
+                    <h4>Flowers</h4>
+                    <div class="row" *ngFor="let flower of flowers">
+                        <div class="col-md-3 col-lg-2 d-none d-md-block flowerImage">
+                            <img src="{{ imgUrl + flower.Image }}" width="60" height="60">
+                        </div>
+                        <div class="col-md-9 col-lg-10 number-spiner">
+                            <div class="shi">
+                                <label for="number">{{ flower.Name }}</label>
+                                <div class="nice-number">
+                                    <button type="button" (click)="decrease(flower)"><i class="fas fa-caret-left"></i></button>
+                                    <input type="number" value="{{ flower.Quantity }}" data-id="{{ flower.ID }}">
+                                    <button type="button" (click)="increase(flower)"><i class="fas fa-caret-right"></i></button>
+                                </div>
+                                <h5>{{flower.Price}}$</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="number-spiner totalparice">
+                        <div class="nice-number">
+                            <label for="number">TOTAL ( <span class="total-item">{{Quantity}} Rose{{ (Quantity === 1)?'':'s' }}</span> )</label>
+
+                            <h5>{{Total}}$</h5>
+                        </div>
+                    </div>
+                    <div class="row col-12 noPadding">
+                        <label class="warningRed">* Please note that the minimum accepted cost of a bouquet is 25 $</label>
+                    </div>
+                    <span class="addButton" (click)="addToCart()">ADD TO CART</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

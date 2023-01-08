@@ -1,0 +1,11 @@
+<div class="product-item">
+  <div class="product-img text-center"><img src="{{imagesUrl}}/products/{{product.Image}}"></div>
+  <div class="product-details">
+    <h3>{{product.Name}}</h3>
+    <p>{{product.Description}}</p>
+    <p *ngIf="product.Variants && product.Variants.length">(Multiple sizes available)</p>
+    <h4 class="price">{{product.Price}}$</h4>
+    <div class="shop-btn"  [routerLink]="['/shopProduct/'  + product.Name.split(' ').join('_') + '/' +product.ID]"><a class="btn" data-id="{{product.ID}}">Shop Now</a></div>
+    <div class="more-btn"> <a (click)="moreLikeThis(product.CategoryID)">More Like This</a></div>
+  </div>
+</div>

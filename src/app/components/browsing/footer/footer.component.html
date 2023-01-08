@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="footer">
+      <div class="col-xs-12">
+          <div class="row">
+              <div class="contact-information col-sm-6 col-xl-3">
+                  <h4 class="hadding">CONTACT US</h4>
+                  <p>Phone: +961 1 445 967</p>
+                  <p>Mobile: +961 3 457 765 <a href="https://wa.me/9613457765"><i class="fab fa-whatsapp"></i></a></p>
+                  <p><a href="mailto:ehanna@lestroisfleurs.com">Email: ehanna@lestroisfleurs.com</a></p>
+                  <p>Address: Nahr street, Achrafieh - Lebanon</p>
+              </div>
+              <div class="contact-information col-sm-6 col-xl-3">
+                  <h4 class="hadding">COMPANY</h4>
+                  <ul>
+                      <li [routerLink]="['/aboutus']"><span>About Us</span></li>
+                      <li><a href="mailto:ehanna@lestroisfleurs.com">Support</a></li>
+                  </ul>
+              </div>
+              <div class="contact-information col-sm-6 col-xl-3">
+                  <h4 class="hadding">ACCOUNT</h4>
+                  <ul>
+                      <li [routerLink]="['/profile']"><span>Manage Your Account</span></li>
+                      <li [routerLink]="['/specialPayment']" style="padding-top: 10px;"><span class="specialItem">Special Payment</span></li>
+                  </ul>
+              </div>
+              <div class="footer-social-icon col-sm-6 col-xl-3">
+                  <!-- <div class="hadding"> -->
+                      <h4>STAY CONNECTED</h4>
+    
+                      <ul>
+                          <li class="socialIcon" (click)="socialMedia('insta')"><span><i class="fab fa-instagram"></i></span></li>
+                          <!-- <li><span><i class="fab fa-linkedin"></i></span></li>
+                          <li><span><i class="fab fa-twitter"></i></span></li>
+                          <li><span><i class="fab fa-google-plus-g"></i></span></li> -->
+                          <li class="socialIcon" (click)="socialMedia('fb')"><span><i class="fab fa-facebook-f"></i></span></li>
+                      </ul>
+                  <!-- </div> -->
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

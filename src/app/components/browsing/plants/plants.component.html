@@ -1,0 +1,31 @@
+<div class="container-fluid page-hadding">
+  <div class="hadding">
+    <h2>PLANTS</h2>
+  </div>
+</div>
+<!--====== Heading End ======-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2 col-sm-9 col-xs-12">
+      <div class="sidbar-left">
+        <h2>CATEGORIES</h2>
+        <ltf-categories [typeID]="[2]" (productsFilter)="filterByCateg($event)"></ltf-categories>
+        <br>
+        <div class="price-filter">
+          <h2>PRICE</h2>
+          <ltf-range-slider (priceFilter)="filterByPrice($event)"></ltf-range-slider>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+      <div class="product-section" id="productslisting">
+        <div class="row row-eq-height">
+          <div *ngFor="let product of products" class="col-xl-4 col-md-6 col-xs-12">
+            <ltf-product [product]="product" (categFilter)="filterByCateg($event)"></ltf-product>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-center" *ngIf="cntToLoad < maxToLoad"><span class="btn see-more-btn" (click)="loadMore()">SEE MORE</span></div>
+  </div>
+</div>

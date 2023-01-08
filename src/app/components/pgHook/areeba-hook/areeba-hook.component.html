@@ -1,0 +1,201 @@
+<div class="container-fluid page-hadding">
+  <div class="hadding">
+    <h2>ORDER STATUS</h2>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="statusContent">
+      <div class="success" *ngIf="tx.Status && !tx.Transfer">
+        <img src="{{imgUrl}}/cdn/thankyou.png" alt="status" />
+        <br>
+        <div>
+          Thank you for your payment.
+          <br> We will begin processing your request as soon as possible.
+        </div>
+        <br> Transaction: {{tx.TxRef}}
+        <div class="checkproduct d-none d-md-block" *ngIf="products.length>0">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Image</td>
+                <td>Product Name</td>
+                <td>Quantity</td>
+                <td>Unit price</td>
+                <td>Total</td>
+              </tr>
+              <tr style="height: 100px;" *ngFor="let cp of products">
+                <td>
+                  <div class="select-image">
+                    <img src="{{getCartProductImage(cp)}}" alt="">
+                  </div>
+                </td>
+                <td>
+                  <div style="margin-top: 13px;">
+                    <h4>{{cp.product.name}}</h4>
+                    <p>{{cp.product.description}}</p>
+                    <h5 style="margin-top: 20px;">{{((cp.product.ID)?'Addons':'Details')}}:</h5>
+                    <div class="addons" *ngIf="cp.product.ID">
+                      <img *ngFor="let si of cp.addons" src="{{imgUrl}}/products/{{si.Image}}" alt="{{si.Name}}" style="float: left; margin: 0 10px; width: 120px; height: 150px;" />
+                      <span *ngIf="cp.addons.length === 0">None</span>
+                    </div>
+                    <div class="addons" *ngIf="cp.product.ID === 0">
+                        <div *ngIf="cp.customBouquet && cp.customBouquet.length > 0">{{cp.product.Description}}</div>
+                        <div *ngIf="cp.bundle">
+                            <img *ngFor="let si of cp.bundle.Products" src="{{imgUrl}}/products/{{si.Image}}" alt="{{si.Name}}" style="float: left; margin: 0 10px; width: 120px; height: 150px;" />
+                        </div>
+                    </div>
+                  </div>
+                </td>
+                <td style="vertical-align: middle">
+                  <div class="number-spiner">
+                    <div class="nice-number">
+                      <div class="nice-number">
+                        <span>{{cp.quantity}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td style="vertical-align: middle">
+                  <div>{{calculateUnitPrice(cp)}}$</div>
+                </td>
+                <td style="vertical-align: middle">
+                  <div>{{calculateTotalPrice(cp)}}$</div>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td colspan="2">Sub-Total</td>
+                <td>{{calculateSubTotal()}}$</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td colspan="2">Delivery</td>
+                <td>{{calculateDelivery()}}$</td>
+              </tr>
+              <tr *ngIf="calculateDiscount()">
+                <td></td>
+                <td></td>
+                <td colspan="2">Discount</td>
+                <td>{{calculateDiscount()}}$</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>Total</td>
+                <td></td>
+                <td>{{calculateTotal()}}$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="success" *ngIf="tx.Transfer">
+          <img src="{{imgUrl}}/cdn/thankyou.png" alt="status" />
+          <br>
+          <div>
+           Order Has been submitted
+           <br/>
+            Please make a bank transfer to:
+           <br/>
+           Account Number / Branch : 00904369-0006 Dora   Vartanian<br/>
+           IBAN : LB93 0056 0000 0000 0090 4369 0006<br/>
+           Currency Code : USD<br/>
+           Swift code: AUDBLBBX<br/>
+           <br/> Please use Order-{{tx.TxRef}} as transaction reference/reason.
+            <br>For questions please whatsapp or call 009613-457765 
+            <br/> Our team will be in contact with you shortly to support with the bank transfer.
+          </div>
+          <br> Transaction: {{tx.TxRef}}
+          <div class="checkproduct d-none d-md-block">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Image</td>
+                  <td>Product Name</td>
+                  <td>Quantity</td>
+                  <td>Unit price</td>
+                  <td>Total</td>
+                </tr>
+                <tr style="height: 100px;" *ngFor="let cp of products">
+                  <td>
+                    <div class="select-image">
+                      <img src="{{getCartProductImage(cp)}}" alt="">
+                    </div>
+                  </td>
+                  <td>
+                    <div style="margin-top: 13px;">
+                      <h4>{{cp.product.name}}</h4>
+                      <p>{{cp.product.description}}</p>
+                      <h5 style="margin-top: 20px;">{{((cp.product.ID)?'Addons':'Details')}}:</h5>
+                      <div class="addons" *ngIf="cp.product.ID">
+                        <img *ngFor="let si of cp.addons" src="{{imgUrl}}/products/{{si.Image}}" alt="{{si.Name}}" style="float: left; margin: 0 10px; width: 120px; height: 150px;" />
+                        <span *ngIf="cp.addons.length === 0">None</span>
+                      </div>
+                      <div class="addons" *ngIf="cp.product.ID === 0">
+                          <div *ngIf="cp.customBouquet && cp.customBouquet.length > 0">{{cp.product.Description}}</div>
+                          <div *ngIf="cp.bundle">
+                              <img *ngFor="let si of cp.bundle.Products" src="{{imgUrl}}/products/{{si.Image}}" alt="{{si.Name}}" style="float: left; margin: 0 10px; width: 120px; height: 150px;" />
+                          </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: middle">
+                    <div class="number-spiner">
+                      <div class="nice-number">
+                        <div class="nice-number">
+                          <span>{{cp.quantity}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="vertical-align: middle">
+                    <div>{{calculateUnitPrice(cp)}}$</div>
+                  </td>
+                  <td style="vertical-align: middle">
+                    <div>{{calculateTotalPrice(cp)}}$</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td colspan="2">Sub-Total</td>
+                  <td>{{calculateSubTotal()}}$</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td colspan="2">Delivery</td>
+                  <td>{{calculateDelivery()}}$</td>
+                </tr>
+                <tr *ngIf="calculateDiscount()">
+                  <td></td>
+                  <td></td>
+                  <td colspan="2">Discount</td>
+                  <td>{{calculateDiscount()}}$</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>Total</td>
+                  <td></td>
+                  <td>{{calculateTotal()}}$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <div class="failure" *ngIf="!tx.Status">
+        <img src="{{imgUrl}}/cdn/error.png" alt="status" />
+        <br>
+        <div>
+          Oops, there was an issue with your payment.
+          <br> Please try again in a few minutes or contact us to help you with your purchase.
+        </div>
+        <br> Transaction: {{tx.TxRef}}
+      </div>
+    </div>
+  </div>
+</div>

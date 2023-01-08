@@ -1,0 +1,22 @@
+<div mat-dialog-title>
+  <div class="d-flex justify-content-between mb-5">
+    <mat-icon matPrefix>keyboard_arrow_left</mat-icon>
+    <div>Select Shipping Method</div>
+    <mat-icon matSuffix (click)="onNoClick()" class="close-button"
+      >close</mat-icon
+    >
+  </div>
+</div>
+<div mat-dialog-content>
+  <mat-radio-group aria-label="Select an option" [(ngModel)]="data">
+    <div
+      *ngFor="let shippingMethod of shippingMethods"
+      class="radio-wrapper d-flex mb-4 pl-3 justify-content-between"
+    >
+      <mat-radio-button [value]="shippingMethod.id">{{
+        shippingMethod.text
+      }}</mat-radio-button>
+      <div class="shipping-price">AED {{ shippingMethod.price }}</div>
+    </div>
+  </mat-radio-group>
+</div>

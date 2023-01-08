@@ -1,0 +1,65 @@
+<!--       slider srart-->
+<div class="container-fluid">
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active occasion-banner">
+        <img src="{{imgUrl}}/cdn/flower_slide.png" alt="...">
+        <div class="slider-contant">
+          <h3>FLOWERS FOR YOUR <br>SPECIAL OCCASION </h3>
+          <p>Send flowers same day across Lebanon 
+              for any occasion, holiday, seasons ...</p>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+<!--       slider End-->
+<!-- <div class="container">
+  <div class="occasion-containt">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12 d-none d-sm-block text-center">
+        <div class="sp-day-banner">
+          <h4>HAPPY</h4>
+          <h1>Mother's Day</h1>
+          <p>THANK YOU MOM <br>FOR ALL YOUR LOVE</p>
+          <img src="{{imgUrl}}/cdn/Asset 40.png" class="img-responsive">
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-6 col-xs-12">
+        <div class="occasion-slug">
+          <h2>OCCASIONS</h2>
+          <br>
+          <p>Did you know that there is a certain flower type and color for each occasion?<br>
+            Whether it’s a birthday or an anniversary each arrangement is done completely different.<br>
+            Our florists are always keen on creating the most beautiful arrangements to fit each event,<br>
+            using fresh and premium flowers only! <br>
+            Don’t forget to add along a special gift from our Gifts and Sweets section</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="occasion-section">
+  <div class="container">
+    <div class="occasion-product">
+      <div class="row">
+        <div *ngFor="let occasion of occasions" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center">
+          <div class="occasion-item" [routerLink]="['/occasionProducts',occasion.Name.split(' ').join('_') , occasion.ID]">
+            <div class="product-img-bac">
+              <div class="gift-image"><img src="{{imgUrl + '/occasions/' + occasion.ImageURL}}" class="img-responsive"></div>
+              <div class="gift-hovet"><img src="{{imgUrl}}/cdn/gift_icon.png"></div>
+            </div>
+          </div>
+          <div class="occasin-pr-name">
+            <h3>{{occasion.Name}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
